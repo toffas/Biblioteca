@@ -121,7 +121,9 @@ public class Main {
                         novoLivro.setAutor(leitor.lerAutor());
                         novoLivro.setNome(leitor.lerNomeLivro());
                         novoLivro.setQuantidadeEmEstoque(1);
+                        System.out.println("Livro adicionado com sucesso!");
                         estoque.salvar(novoLivro);
+
                         break;
                     }
 
