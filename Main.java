@@ -36,7 +36,7 @@ public class Main {
                         Emprestimo emprestimo = new Emprestimo(usuario, livro, new Date());
                         emprestimos.salvar(emprestimo);
 
-                        System.out.println("Livro emprestado com sucesso!");
+                        System.out.println("Livro emprestado com sucesso! Na data: " + new Date());
                         break;
                     }
 
@@ -45,7 +45,7 @@ public class Main {
                     Emprestimo emprestimo = emprestimos.buscarPorFiltro(e -> e.getUsuario().equals(usuario) && e.getLivro().equals(finalLivro));
                     emprestimo.setDataDevolucao(new Date());
 
-                    System.out.println("Livro devolvido com sucesso!");
+                    System.out.println("Livro devolvido com sucesso! Na data: " + new Date());
                     break;
                 case 3: // Buscar livros
                     int opcaoBuscar = leitor.lerOpcaoBuscarLivro();
