@@ -3,12 +3,14 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         boolean exit = false;
+
+        //Entrada de dados
         LeitorServico leitor = new LeitorServico();
 
         Repositorio<Usuario> usuarios = new Repositorio<>();
         Repositorio<Livro> estoque = new Repositorio<>();
         Repositorio<Emprestimo> emprestimos = new Repositorio<>();
-
+        //Escolha opcao
         while (!exit) {
             int opcao = leitor.lerOpcao();
 
@@ -49,12 +51,14 @@ public class Main {
                     break;
                 case 3: // Buscar livros
                     int opcaoBuscar = leitor.lerOpcaoBuscarLivro();
-
+                    //buscar livro por nome
                     if (opcaoBuscar == 1) {
                         livro = estoque.buscarPorFiltro(l -> l.getNome().equals(leitor.lerNomeLivro()));
-                    } else if (opcaoBuscar == 2) {
+                    } //buscar livro por UUID
+                    else if (opcaoBuscar == 2) {
                         livro = estoque.buscarPorFiltro(l -> l.getId().equals(leitor.lerID()));
-                    } else if (opcaoBuscar == 3) {
+                    } //buscar livro por autor
+                    else if (opcaoBuscar == 3) {
                         livro = estoque.buscarPorFiltro(l -> l.getAutor().equals(leitor.lerAutor()));
                     } else {
                         System.err.println("ERRO: opcao invalida!");
@@ -70,7 +74,7 @@ public class Main {
                     break;
                 case 4: // Gerenciar Usuarios
                     int opcaoUsuario = leitor.lerOpcaoGerenciar();
-
+                    //Inserir usuario
                     if (opcaoUsuario == 1) {
                         Usuario novoUsuario = new Usuario();
                         novoUsuario.setId(leitor.lerID());
@@ -93,7 +97,7 @@ public class Main {
                         System.err.println("ERRO: Usuario nao encontrado!");
                         break;
                     }
-
+                    //Deletar usuario
                     if (opcaoUsuario == 2) {
                         if (usuarios.removerPorFiltro(u -> u.getNome().equals(usuario.getNome()))) {
                             System.out.println("Usuario removido com sucesso!");
@@ -101,6 +105,7 @@ public class Main {
                         }
                         System.err.println("ERRO: Usuario nao encontrado!");
                         break;
+                     //Alterar usuario
                     } else if (opcaoUsuario == 3) {
                         usuario.setNome(leitor.lerNomeUsuario());
                         System.out.println("Usuario alterado com sucesso!");
@@ -112,7 +117,7 @@ public class Main {
                 case 5:
                     int opcaoLivro = leitor.lerOpcaoGerenciar();
                     livro = estoque.buscarPorFiltro(l -> l.getNome().equals(leitor.lerNomeLivro()));
-
+                    //adicionar livro
                     if (opcaoLivro == 1) {
                         if (livro != null) {
                             livro.setQuantidadeEmEstoque(livro.getQuantidadeEmEstoque() + 1);
@@ -123,8 +128,8 @@ public class Main {
                         novoLivro.setAutor(leitor.lerAutor());
                         novoLivro.setNome(leitor.lerNomeLivro());
                         novoLivro.setQuantidadeEmEstoque(1);
-                        System.out.println("Livro adicionado com sucesso!");
                         estoque.salvar(novoLivro);
+                        System.out.println("Livro adicionado com sucesso!");
 
                         break;
                     }
@@ -133,7 +138,7 @@ public class Main {
                         System.err.println("ERRO: Livro nao encontrado!");
                         break;
                     }
-
+                    //remover livro
                     if (opcaoLivro == 2) {
                         if (estoque.removerPorFiltro(l -> l.getNome().equals(livro.getNome()))) {
                             System.out.println("Livro removido com sucesso!");
@@ -141,6 +146,7 @@ public class Main {
                         }
                         System.err.println("ERRO: Livro nao encontrado!");
                         break;
+                     //alterar livro
                     } else if (opcaoLivro == 3) {
                         livro.setNome(leitor.lerNomeLivro());
                         livro.setId(leitor.lerID());
@@ -151,6 +157,7 @@ public class Main {
                     }
                     System.err.println("ERRO: Opcao invalida!");
                     break;
+                    //Sair do sistema
                 case 6:
                     exit = true;
                     break;
