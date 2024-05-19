@@ -81,7 +81,9 @@ public class Main {
                             break;
                         }
 
-                        usuarios.salvar(novoUsuario);
+                        usuarios.salvar(novoUsuario
+                        System.out.println("Usuario adicionado com sucesso!");
+
                         break;
                     }
 
